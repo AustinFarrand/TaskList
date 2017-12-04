@@ -1,0 +1,24 @@
+{
+  "name": "TaskList",
+  "productName" : "My first electron app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AustinFarrand/TaskList.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AustinFarrand/TaskList/issues"
+  },
+  "homepage": "https://github.com/AustinFarrand/TaskList#readme",
+  "devDependencies": {
+    "electron": "^1.7.9"
+  }
+}
