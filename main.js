@@ -24,7 +24,16 @@ const template = [
         label: "File",
         submenu: [
             {
-                label: 'Open'
+                label: 'Open',
+                click: function(){
+                    app.showOpenDialog((filenames)=>{
+                        if(filenames === undefined){
+                        alert("no files were selected")
+                        return;
+                    }
+                        readFile(filenames[0])
+                    })
+                },
             }
         ]
        },{
