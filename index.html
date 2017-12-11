@@ -2,15 +2,24 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>title</title>
+    <title>To-Do List</title>
     <link href="styles.css" rel="stylesheet">
   </head>
   <body>
-    <h1>sweet</h1>
-    <input type="text" id="content">
-    <button id="btn">Create a File</button>
-    <button id="open">Open a File</button>
-    <textarea id="output" rows=3></textarea>
-    <script>require('./renderer.js')</script>
+    <h1>To-Do List</h1>
+    <ul></ul>
+    <button id="btn">Save File</button>
+    <script>
+      require('./renderer.js')
+      const electron = require('electron')
+      const {ipcRenderer} = electron
+      const ul = document.querySelector('ul')
+      ipcRenderer.on('item.add', function(e, item){
+        const li = document.createElement('li')
+        const itemText = document.createTextNode(item)
+        li.appendChild(itemText)
+        ul.appendChild(li)
+      })
+    </script>
   </body>
 </html>

@@ -3,7 +3,7 @@ var dialog = app.dialog
 var fs = require('fs')
 
 document.getElementById('btn').addEventListener('click', saveFile)
-document.getElementById('open').addEventListener('click', openFile)
+//document.getElementById('open').addEventListener('click', openFile)
 
 
 function saveFile(){
@@ -20,7 +20,7 @@ function saveFile(){
         })
     })
 }
-
+/*
 function openFile(){
     dialog.showOpenDialog((filenames)=>{
         if(filenames === undefined){
@@ -30,7 +30,7 @@ function openFile(){
         readFile(filenames[0])
     })
 }
-
+*/
 function readFile(filepath){
     fs.readFile(filepath, 'utf-8',(err, data)=>{
         if(err){

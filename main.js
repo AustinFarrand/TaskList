@@ -3,28 +3,31 @@ const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const Menu = electron.Menu
 const {dialog} = require('electron')
+const ipcMain = electron.ipcMain
 
-
-
+//Start the app
 app.on('ready', function(){
-    //console.log("electron running!")
+    //Creates new window
     mainWindow = new BrowserWindow({
  })
 
+//Loads html into the window
  mainWindow.loadURL(`file://${__dirname}/index.html`)
 
+//Build menu from Template and then Insert
  const menu = Menu.buildFromTemplate(template)
  Menu.setApplicationMenu(menu)
-
+ 
+//When app is closed
     mainWindow.on('closed', function(){
-        console.log('closed')
-        mainWindow = null
+        app.quit()
     })
 })
 
 var showOpen = function(){
     dialog.showOpenDialog({properties: ['openFile'],})
 }
+
 
 const template = [
     {
@@ -41,7 +44,10 @@ const template = [
             label:"Edit",
             submenu:[
                 {
-                    label:"Add Item"
+                    label:"Add Item",
+                    click(){
+                        addWindow()
+                    }
                 },
                 {
                     type: "separator"
@@ -70,3 +76,22 @@ const template = [
     }
 ]
 
+//Window for adding items
+function addWindow(){
+    //Creates add window
+    createAddWindow = new BrowserWindow({
+        width: 350,
+        height: 250,
+        title: 'Add a task'
+    })
+   
+   //Loads html into the window
+ createAddWindow.loadURL(`file://${__dirname}/addWindow.html`)
+ 
+}
+
+//Catch item:add
+ipcMain.on('item:add', function(e, item){
+    console.log(item)
+    mainWindow.webContents.send('item:add', item)
+})
