@@ -2,6 +2,9 @@ const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const Menu = electron.Menu
+const {dialog} = require('electron')
+
+
 
 app.on('ready', function(){
     //console.log("electron running!")
@@ -19,6 +22,10 @@ app.on('ready', function(){
     })
 })
 
+var showOpen = function(){
+    dialog.showOpenDialog({properties: ['openFile'],})
+}
+
 const template = [
     {
         label: "File",
@@ -26,15 +33,9 @@ const template = [
             {
                 label: 'Open',
                 click: function(){
-                    app.showOpenDialog((filenames)=>{
-                        if(filenames === undefined){
-                        alert("no files were selected")
-                        return;
-                    }
-                        readFile(filenames[0])
-                    })
-                },
-            }
+                   showOpen()
+                }
+            },
         ]
        },{
             label:"Edit",
@@ -68,3 +69,4 @@ const template = [
         accelerator: 'ctrl+I'
     }
 ]
+

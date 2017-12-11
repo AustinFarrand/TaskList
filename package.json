@@ -1,6 +1,6 @@
 {
   "name": "TaskList",
-  "productName" : "My first electron app",
+  "productName": "My first electron app",
   "version": "1.0.0",
   "description": "",
   "main": "main.js",
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/AustinFarrand/TaskList#readme",
   "devDependencies": {
     "electron": "^1.7.9"
+  },
+  "dependencies": {
+    "file-system": "^2.2.2"
   }
 }
