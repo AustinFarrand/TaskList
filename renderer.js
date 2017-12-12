@@ -12,7 +12,7 @@ function saveFile(){
             alet("You didn't enter a file name")
             return
         }
-        var content = document.getElementById('content').value
+        var content = document.getElementById('items').value
 
         fs.writeFile(filename, content,(err)=>{
             if(err)console.log(err)

@@ -3,6 +3,7 @@ const electron = require('electron')
 //const BrowserWindow = electron.BrowserWindow
 //const Menu = electron.Menu
 const {dialog} = require('electron')
+var fs = require('fs')
 
 const{app, BrowserWindow, Menu, ipcMain} = electron
 
@@ -54,7 +55,10 @@ const template = [
                     type: "separator"
                 },
                 {
-                    label:"Clear Items"
+                    label:"Clear Items",
+                    click(){
+                        mainWindow.webContents.send('item:clear')
+                    }
                 },
                 {
                     type: "separator"
@@ -93,6 +97,7 @@ function addWindow(){
 
 //Catch item:add
 ipcMain.on('item:add', function(e, item){
-    console.log(item)
     mainWindow.webContents.send('item:add', item)
 })
+
+

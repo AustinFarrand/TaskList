@@ -7,19 +7,52 @@
   </head>
   <body>
     <h1>To-Do List</h1>
-    <ul></ul>
+    <ul id="u"></ul>
     <button id="btn">Save File</button>
     <script>
-      //require('./renderer.js')
+      require('./renderer.js')
       const electron = require('electron')
       const {ipcRenderer} = electron
       const ul = document.querySelector('ul')
+      var app = require("electron").remote
+      var dialog = app.dialog
+      var fs = require('fs')
+      
+
+      //Add Item
       ipcRenderer.on('item:add', function(e, item){
-        const li = document.createElement('li')
+        const node = document.createElement('li')    
         const itemText = document.createTextNode(item)
-        li.appendChild(itemText)
-        ul.appendChild(li)
+        node.appendChild(itemText)
+        ul.appendChild(node)
       })
+
+      //Clear Items
+      ipcRenderer.on('item:clear', function(){
+        ul.innerHTML = ''
+      })
+
+      //Remove Item
+      ul.addEventListener('dblclick', removeItem)
+      function removeItem(e){
+        e.target.remove()
+      }
+
+      document.getElementById('btn').addEventListener('click', saveFile)
+      function saveFile(){
+      dialog.showSaveDialog((filename)=>{
+        if(filename === undefined){
+            alert("You didn't enter a file name")
+            return
+        }
+        var content = document.querySelector('ul').innerHTML
+
+        fs.writeFile(filename, content,(err)=>{
+            if(err)console.log(err)
+                alert("The file has been saved")
+        })
+    })
+}
     </script>
   </body>
 </html>
