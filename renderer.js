@@ -20,7 +20,7 @@ function saveFile(){
         })
     })
 }
-/*
+
 function openFile(){
     dialog.showOpenDialog((filenames)=>{
         if(filenames === undefined){
@@ -30,7 +30,7 @@ function openFile(){
         readFile(filenames[0])
     })
 }
-*/
+
 function readFile(filepath){
     fs.readFile(filepath, 'utf-8',(err, data)=>{
         if(err){

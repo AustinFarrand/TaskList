@@ -1,9 +1,10 @@
 const electron = require('electron')
-const app = electron.app
-const BrowserWindow = electron.BrowserWindow
-const Menu = electron.Menu
+//const app = electron.app
+//const BrowserWindow = electron.BrowserWindow
+//const Menu = electron.Menu
 const {dialog} = require('electron')
-const ipcMain = electron.ipcMain
+
+const{app, BrowserWindow, Menu, ipcMain} = electron
 
 //Start the app
 app.on('ready', function(){
