@@ -1,7 +1,4 @@
 const electron = require('electron')
-//const app = electron.app
-//const BrowserWindow = electron.BrowserWindow
-//const Menu = electron.Menu
 const {dialog} = require('electron')
 var fs = require('fs')
 
@@ -26,8 +23,25 @@ app.on('ready', function(){
     })
 })
 
-var showOpen = function(){
-    dialog.showOpenDialog({properties: ['openFile'],})
+
+function openFile(){
+    dialog.showOpenDialog((filenames)=>{
+        if(filenames === undefined){
+            alert("no files were selected")
+            return;
+        }
+        readFile(filenames[0])
+    })
+}
+
+function readFile(filepath){
+    fs.readFile(filepath, 'utf-8',(err, data)=>{
+        if(err){
+            alert("There was an error retreiving your file")
+            return
+        }
+        mainWindow.webContents.send('item:add', data)
+    })
 }
 
 
@@ -38,7 +52,7 @@ const template = [
             {
                 label: 'Open',
                 click: function(){
-                   showOpen()
+                    openFile()
                 }
             },
         ]

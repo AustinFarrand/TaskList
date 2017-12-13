@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <title>To-Do List</title>
     <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   </head>
   <body>
-    <h1>To-Do List</h1>
-    <ul id="u"></ul>
-    <button id="btn">Save File</button>
+    <div>
+      <h1 class="page-header">To-Do List</h1>
+        <ul id="u"></ul>
+    </div>
+    
+    <button id="btn" class= "btn-floating btn-large waves-effect waves-light red ">Save File</button>
+    
     <script>
-      require('./renderer.js')
       const electron = require('electron')
       const {ipcRenderer} = electron
       const ul = document.querySelector('ul')
@@ -21,7 +26,7 @@
 
       //Add Item
       ipcRenderer.on('item:add', function(e, item){
-        const node = document.createElement('li')    
+        const node = document.createElement('li') 
         const itemText = document.createTextNode(item)
         node.appendChild(itemText)
         ul.appendChild(node)
@@ -29,7 +34,7 @@
 
       //Clear Items
       ipcRenderer.on('item:clear', function(){
-        ul.innerHTML = ''
+        ul.innerHTML = ' '
       })
 
       //Remove Item
@@ -45,7 +50,7 @@
             alert("You didn't enter a file name")
             return
         }
-        var content = document.querySelector('ul').innerHTML
+        var content = document.querySelector('ul').textContent
 
         fs.writeFile(filename, content,(err)=>{
             if(err)console.log(err)
@@ -53,6 +58,7 @@
         })
     })
 }
+
     </script>
   </body>
 </html>
