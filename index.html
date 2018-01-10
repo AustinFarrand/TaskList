@@ -6,11 +6,13 @@
     <link href="styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    
   </head>
   <body>
     <div>
       <h1 class="page-header">To-Do List</h1>
         <ul id="u"></ul>
+        <!--<p>Nothing</p>>-->
     </div>
     
     <button id="btn" class= "btn-floating btn-large waves-effect waves-light red ">Save File</button>
@@ -23,7 +25,7 @@
       var dialog = app.dialog
       var fs = require('fs')
       
-
+      //This means nothing
       //Add Item
       ipcRenderer.on('item:add', function(e, item){
         const node = document.createElement('li') 
